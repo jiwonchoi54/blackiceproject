@@ -1,0 +1,318 @@
+<!docktype html>
+<html lang="kr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+
+
+    <!-- 파이어베이스 DB 연결 -->
+    <script defer src="/__/firebase/6.2.4/firebase-app.js"></script>
+    
+    <script defer src="/__/firebase/6.2.4/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.2.4/firebase-database.js"></script>
+    <script defer src="/__/firebase/6.2.4/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/6.2.4/firebase-storage.js"></script>
+    
+    <script defer src="/__/firebase/init.js"></script>
+    
+    <title>ForD 어드민 페이지</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        
+        <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="" id="sidebar">
+            <div class="container-fluid">
+      
+              <div class="row">
+                    <div class="col-xl-2 col-lg-3 sidebar fixed-top">
+                        
+                        <a href="#" class="navbar-brand text-black text-center d-block mx-auto py-2 mb-4 buttom-border">ForD</a>
+                        <div class="bottom-border pb-3">
+                          <img src="images/mask.png" alt="" width="50" class="rounded-circle mr-3">
+                          <a href="#" class="text-black">홍길동</a>
+                        </div>
+                        <ul class="navbar-nav flex-column mt-4">
+                          <li class="nav-item">
+                            <a href="index.html" class="nav-link text-black p-3 mb-2 current">
+                              <i class="fas fa-columns text-black fa-lg mr-3"></i>Dashboard
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a href="user.html" class="nav-link text-black p-3 mb-2 sidebar-link">
+                              <i class="fas fa-cubes text-black fa-lg mr-3"></i>사용자 신고 접수 내역
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a href="stats.html" class="nav-link text-black p-3 mb-2 sidebar-link">
+                              <i class="far fa-chart-bar text-black fa-lg mr-3"></i>통계
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a href="sensor.html" class="nav-link text-black p-3 mb-2 sidebar-link">
+                              <i class="fas fa-dot-circle text-black fa-lg mr-3"></i>센서 현황 / 관리
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a href="weather.html" class="nav-link text-black p-3 mb-2 sidebar-link">
+                              <i class="fas fa-icicles text-black fa-lg mr-3"></i>날씨
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a href="map.html" class="nav-link text-black p-3 mb-2 sidebar-link">
+                              <i class="far fa-map text-black fa-lg mr-3"></i>지도
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a href="push.html" class="nav-link text-black p-3 mb-2 sidebar-link">
+                              <i class="far fa-envelope-open text-black fa-lg mr-3"></i>push 메시지
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a href="response.html" class="nav-link text-black p-3 mb-2 sidebar-link">
+                              <i class="fas fa-headset text-black fa-lg mr-3"></i>사고 대응
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    <div class="col-xl-10 col-lg-10 ml-auto bg-primary fixed-top py-2 top-navbar">
+                      <div class="row align-items-center">
+                        <div class="col-md-9">
+                          <h4 class="text-white text-uppercase mb-0">대시보드</h4>
+                        </div>
+                        <div class="col-md-3">
+                          <ul class="navbar-nav">
+                            <li class="nav-item ml-auto"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign-out"><i class="fas fa-sign-out-alt text-white fa-lg"></i></a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 대시보드 상단 카드 4개 -->
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row pt-md-5 mt-md-3 mb-5">
+
+              <div class="col-xl-3 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="text-left text-secondary">
+                        <h3>350</h3>
+                        <h5>앱 신규 가입자</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-sync mr-3"></i>
+                    <span>최신 상태</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="text-left text-secondary">
+                        <h3>2,935</h3>
+                        <h5>당월 신고 건수</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-sync mr-3"></i>
+                    <span>최신 상태</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="text-left text-secondary">
+                        <h3>592</h3>
+                        <h5>전월 신고 건수</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-sync mr-3"></i>
+                    <span>최신 상태</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="text-left text-secondary">
+                        <h3>890</h3>
+                        <h5>가동중인 센서 수</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-sync mr-3"></i>
+                    <span>최신 상태</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 대시보드 중간 차트 2개 -->
+    <section>
+      <div class="container-fluid">
+        <div class="row mb-5">
+          <div class="col-x1-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row align-items-center">
+              <div class="col-x1-6 col-12 mb-xl-0">
+                <h3 class="text-muted text-left mb-3">결빙 신고 건수</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container-fluid">
+        <div class="row mb-5">
+          <div class="col-x1-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row align-items-center">
+              <div class="col-xl-6 col-12">
+                <h3 class="text-muted text-left mb-3">결빙 측정 횟수</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 대시보드 하단 긴급 메시지 -->
+    <section>
+      <div class="container-fluid">
+        <div class="row mb-5">
+          <div class="col-x1-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row">
+              <div class="col-10">
+                <h3 class="text-muted text-left mb-3">긴급 메시지</h3>
+                <table class="table bg-light text-left">
+                  <thead>
+                    <tr class="text-muted">
+                      <th>#</th>
+                      <th>내용</th>
+                      <th>날짜 / 시간</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <th>1</th>
+                      <th>역곡역 북부 베스킨라빈스 앞 공사 진행중</th>
+                      <th>23-03-2021 12:40</th>
+                    </tr>
+
+                    <tr>
+                      <th>2</th>
+                      <th>선부 2동 파인 도로 보수 작업 필요</th>
+                      <th>23-03-2021 12:40</th>
+                    </tr>
+
+                    <tr>
+                      <th>3</th>
+                      <th>역선부 2동 결빙 위험 지역 추가 작업 완료</th>
+                      <th>23-03-2021 12:40</th>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+                <!-- 페이지네이션 -->
+                <nav>
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                      <a href="#" class="page-link py-2 px-3">
+                        <span>&laquo;</span>
+                      </a>
+                    </li>
+
+                    <li class="page-item active">
+                      <a href="#" class="page-link py-2 px-3">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a href="#" class="page-link py-2 px-3">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a href="#" class="page-link py-2 px-3">3</a>
+                    </li>
+
+                    <li class="page-item">
+                      <a href="#" class="page-link py-2 px-3">
+                        <span>&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- 로그아웃 팝업 -->
+    <div class="modal fade" id="sign-out">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">로그아웃 하시겠습니까?</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            Ford 관리자 페이지에서 로그아웃합니다.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="model">아니요</button>
+            <button type="button" class="btn btn-danger" data-dismiss="model">로그아웃</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
